@@ -3,7 +3,7 @@
 // AUTO HEALTH CHECK BEFORE ENABLE FORM
 const API_URL = "http://localhost:5000/api/contact";
 const API_URL = `${API_BASE}/api/contact`;
-const API_URL = "https://afnuz-academy2.onrender.com/api/contact";
+
 
 
 async function checkBackend() {
