@@ -13,7 +13,7 @@
     <title>Afnuz Academy - Gateway to Jamia & AMU</title>
 
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Graduation Cap</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -28,7 +28,6 @@
             --card: rgba(30, 41, 59, 0.6);
             --border: rgba(255, 255, 255, 0.1);
             --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --success: #10b981;
         }
 
         /* === LIGHT MODE === */
@@ -135,7 +134,7 @@
         /* === WHATSAPP FLOAT === */
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
+            bottom: 80px;
             right: 20px;
             z-index: 100;
             background: #25D366;
@@ -247,19 +246,41 @@
             margin-bottom: 1rem;
             position: relative;
             z-index: 1;
+            background: linear-gradient(90deg, #00eaff, #b163ff, #ff00ea);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: flow 5s linear infinite;
+        }
+        @keyframes flow {
+            0% { background-position: 0%; }
+            100% { background-position: 300%; }
         }
         #hero h2 {
             font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0.6rem;
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        #hero p.hero-sub {
+            font-size: 0.98rem;
+            opacity: 0.85;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 2rem;
+        }
+        .cta-container {
+            position: relative;
+            z-index: 1;
         }
         .cta {
             display: inline-block;
-            background: linear-gradient(45deg, #fff, #f0f9ff);
-            color: var(--primary);
+            background: rgba(255,255,255,0.15);
+            color: white;
             padding: 16px 36px;
             font-weight: 600;
             border-radius: 50px;
@@ -268,28 +289,40 @@
             transition: all 0.4s;
             position: relative;
             overflow: hidden;
-            z-index: 1;
+            border: 1px solid rgba(255,255,255,0.4);
+            backdrop-filter: blur(14px);
             animation: bounce 2s infinite;
         }
         .cta::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: 0.6s;
-            z-index: -1;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
+            animation: ring 4s infinite;
         }
-        .cta:hover::before {
-            left: 100%;
+        @keyframes ring {
+            0%, 100% { transform: translate(0,0); }
+            50% { transform: translate(18%,18%); }
         }
         .cta:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 30px rgba(26, 167, 236, 0.4);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(26, 167, 236, 0.5);
         }
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-6px); }
+        }
+        .cta-whatsapp {
+            margin-top: 1rem;
+            background: rgba(37,211,102,0.9);
+            border-color: rgba(37,211,102,0.9);
+            box-shadow: 0 8px 25px rgba(37,211,102,0.5);
+        }
+        .cta-whatsapp:hover {
+            box-shadow: 0 12px 35px rgba(37,211,102,0.7);
         }
 
         /* === SECTIONS === */
@@ -324,11 +357,20 @@
             border-radius: 20px;
             padding: 1.8rem;
             box-shadow: var(--shadow);
-            transition: all 0.4s;
+            transition: all 0.45s ease;
         }
-        .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+
+        /* === 3D TEACHER CARDS === */
+        .teacher.glass-card {
+            transform-style: preserve-3d;
+        }
+        .teacher.glass-card:hover {
+            transform: translateY(-12px) rotate3d(1, 1, 0, 8deg);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.35);
+        }
+        .teacher:hover img {
+            transform: scale(1.08);
+            box-shadow: 0 0 25px rgba(26, 167, 236, 0.7);
         }
 
         /* === TEACHERS GRID === */
@@ -349,9 +391,7 @@
             border: 4px solid var(--primary);
             box-shadow: 0 4px 15px rgba(26, 167, 236, 0.2);
             transition: 0.3s;
-        }
-        .teacher:hover img {
-            transform: scale(1.08);
+            border-radius: 50%;
         }
         .teacher h3 {
             font-family: 'Space Grotesk', sans-serif;
@@ -364,64 +404,171 @@
             opacity: 0.9;
         }
 
-        /* === COURSES === */
-        #courses ul {
-            max-width: 700px;
-            margin: 2rem auto;
-            list-style: none;
+        /* === WHY CHOOSE US === */
+        #why {
+            padding-top: 2rem;
         }
-        #courses li {
-            padding: 1.2rem 1.6rem;
-            margin: 1rem 0;
-            border-radius: 16px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: 0.3s;
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
-        #courses li:hover {
+        .why-card {
+            padding: 1.6rem;
+            border-radius: 18px;
             background: var(--card);
-            transform: translateX(10px);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
-        #courses li::before {
-            content: "Right Arrow";
+        .why-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 0.6rem;
             color: var(--primary);
-            font-weight: bold;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+        }
+        .why-card span.icon {
+            font-size: 1.6rem;
+            display: inline-block;
+            margin-bottom: 0.4rem;
         }
 
-        /* === FAQ === */
-        .faq-item {
-            margin: 1.2rem 0;
+        /* === JOURNEY / ROADMAP === */
+        #journey {
+            background: radial-gradient(circle at top, rgba(148,163,184,0.15), transparent 55%);
         }
-        .faq-item h4 {
-            color: var(--primary);
-            margin-bottom: 0.6rem;
-            font-family: 'Space Grotesk', sans-serif;
-            cursor: pointer;
+        .journey-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .step {
+            position: relative;
+            padding: 1.5rem 1.4rem 1.4rem;
+            border-radius: 18px;
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.7rem;
         }
-        .faq-item h4::after {
-            content: "+";
-            font-weight: bold;
+        .step h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+        }
+        .step p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* === FAQ (Improved) === */
+        #faq {
+            background: radial-gradient(circle at top, rgba(30,64,175,0.18), transparent 60%);
+        }
+        .faq-layout {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .faq-intro {
+            font-size: 0.98rem;
+            opacity: 0.9;
+        }
+        .faq-intro h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 0.3rem;
+            font-size: 1.4rem;
+        }
+        .faq-intro p {
+            margin-bottom: 0.6rem;
+        }
+        .faq-intro ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+        }
+        .faq-intro li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        .faq-intro li span {
+            font-size: 1rem;
+        }
+
+        .faq-list {
+            margin-top: 0.5rem;
+        }
+        .faq-item {
+            margin: 0.6rem 0;
+            border-radius: 14px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 1rem 1.1rem;
+            cursor: pointer;
             transition: 0.3s;
         }
-        .faq-item.active h4::after {
-            content: "Minus";
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(15,23,42,0.4);
         }
-        .faq-item p {
+        .faq-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.7rem;
+        }
+        .faq-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.98rem;
+        }
+        .faq-title span.icon {
+            font-size: 1.1rem;
+        }
+        .faq-toggle {
+            font-weight: 700;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        .faq-body {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.25s ease;
+            font-size: 0.9rem;
+            opacity: 0.9;
         }
-        .faq-item.active p {
+        .faq-body p {
+            padding-top: 0.5rem;
+        }
+        .faq-item.active .faq-body {
             max-height: 200px;
         }
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
 
-        /* === CONTACT === */
+        /* === CONTACT (NOW ONLY WHATSAPP CTA) === */
         #contact {
             background: linear-gradient(135deg, var(--primary-dark), #1e293b);
             color: white;
@@ -430,48 +577,30 @@
         #contact h2 {
             -webkit-text-fill-color: white;
         }
-        #inquiry-form {
-            max-width: 520px;
-            margin: 2rem auto;
-            display: grid;
-            gap: 1rem;
+        #contact p {
+            max-width: 620px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.9;
+            font-size: 0.98rem;
         }
-        #inquiry-form input,
-        #inquiry-form textarea {
-            padding: 16px;
-            border: none;
-            border-radius: 16px;
-            font-size: 1rem;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
+        #contact .contact-cta {
+            margin-top: 1rem;
+        }
+        #contact .contact-cta a {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 999px;
+            background: #25D366;
             color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        #inquiry-form input::placeholder,
-        #inquiry-form textarea::placeholder {
-            color: rgba(255,255,255,0.7);
-        }
-        #inquiry-form button {
-            background: white;
-            color: var(--primary);
-            border: none;
-            padding: 16px;
             font-weight: 600;
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            transition: 0.4s;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(37,211,102,0.5);
+            transition: 0.3s;
         }
-        #inquiry-form button:hover {
-            background: #f0f9ff;
-            transform: translateY(-2px);
+        #contact .contact-cta a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(37,211,102,0.7);
         }
-        #inquiry-form button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
         .social-links {
             margin-top: 2rem;
             display: flex;
@@ -506,7 +635,7 @@
         /* === BACK TO TOP === */
         #backToTop {
             position: fixed;
-            bottom: 90px;
+            bottom: 150px;
             right: 20px;
             background: var(--primary);
             color: white;
@@ -535,7 +664,6 @@
             z-index: 1001;
             cursor: default;
         }
-
         #goblin-watermark {
             position: absolute;
             bottom: 0;
@@ -549,11 +677,14 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             pointer-events: none;
-            font-weight: bolder;
         }
-
         .watermark-hover-area:hover #goblin-watermark {
             opacity: 0.6;
+        }
+
+        /* === MOBILE BOTTOM CTA === */
+        .mobile-cta {
+            display: none;
         }
 
         /* === SMOOTH SCROLL === */
@@ -561,7 +692,24 @@
             scroll-behavior: smooth;
         }
 
+        /* === SCROLL REVEAL === */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px) scale(.95);
+            transition: 1s cubic-bezier(0.2,0.6,0.2,1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
         /* === RESPONSIVE === */
+        @media (max-width: 900px) {
+            .faq-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (max-width: 768px) {
             header .container {
                 flex-direction: column;
@@ -584,6 +732,41 @@
                 width: 45px;
                 height: 45px;
             }
+            body {
+                padding-bottom: 70px; /* for mobile bottom CTA */
+            }
+            .mobile-cta {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 60px;
+                background: rgba(15,23,42,0.95);
+                backdrop-filter: blur(12px);
+                z-index: 1200;
+                align-items: center;
+                justify-content: space-around;
+                border-top: 1px solid var(--border);
+            }
+            .mobile-cta a {
+                padding: 8px 14px;
+                border-radius: 999px;
+                font-size: 0.9rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .mobile-cta a:first-child {
+                background: #25D366;
+                color: white;
+            }
+            .mobile-cta a:last-child {
+                background: var(--card);
+                color: var(--text);
+                border: 1px solid var(--border);
+            }
         }
     </style>
 </head>
@@ -594,7 +777,9 @@
 
     <!-- Dark Mode Toggle -->
     <div class="theme-toggle" id="themeToggle">
-        <svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+        <svg viewBox="0 0 24 24">
+            <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364 6.364-1.414-1.414M7.05 7.05 5.636 5.636m12.728 0-1.414 1.414M7.05 16.95 5.636 18.364M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8z"/>
+        </svg>
     </div>
 
     <!-- Preloader -->
@@ -602,15 +787,25 @@
         <div class="spinner"></div>
     </div>
 
-    <!-- WhatsApp -->
+    <!-- WhatsApp Floating Button -->
     <div class="whatsapp-float">
-        <a href="https://whatsapp.com/channel/0029Vb7EjppElagkQyw3LN2d" target="_blank">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+        <a href="#" class="wa-btn" data-message="Hi, I want to know about Afnuz Academy.">
+            <img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
         </a>
     </div>
 
     <!-- Back to Top -->
-    <button onclick="topFunction()" id="backToTop" title="Go to top">Up</button>
+    <button onclick="topFunction()" id="backToTop" title="Go to top">↑</button>
+
+    <!-- Mobile Bottom CTA -->
+    <div class="mobile-cta">
+        <a href="#" class="wa-btn" data-message="Hi, I want to know about Afnuz Academy.">
+            📲 WhatsApp
+        </a>
+        <a href="#contact">
+            📩 Contact
+        </a>
+    </div>
 
     <header>
         <div class="container">
@@ -622,8 +817,8 @@
                 <ul>
                     <li><a href="#hero">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#why">Why Us</a></li>
                     <li><a href="#teachers">Teachers</a></li>
-                    <li><a href="#courses">Courses</a></li>
                     <li><a href="#faq">FAQ</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -631,115 +826,282 @@
         </div>
     </header>
 
-    <section id="hero">
+    <!-- HERO -->
+    <section id="hero" class="reveal active">
         <h1>Crack JMI & AMU Entrance with Expert Mentorship</h1>
-        <h2>Online Preparation Classes for 10th Students Aspiring for Class 11 Admission</h2>
+        <h2>Online preparation for Class 10 students aiming for Class 11 admission in JMI & AMU.</h2>
+        <p class="hero-sub">New batches starting soon • Limited seats • Mentors from JMI, AMU & DU</p>
         <div class="cta-container">
-            <a href="https://forms.gle/rLbzrQcgu3gTFy7P7" class="cta">Join Now – Start Today!</a>
+            <a href="https://forms.gle/rLbzrQcgu3gTFy7P7" class="cta">Fill Interest Form</a>
+            <br><br>
+            <a href="#" class="cta cta-whatsapp wa-btn" data-message="Hi, I am interested in Afnuz Academy JMI/AMU Class 11 coaching. Please share details.">
+                Chat on WhatsApp 📲
+            </a>
         </div>
     </section>
 
-    <section id="about" class="container">
+    <!-- ABOUT -->
+    <section id="about" class="container reveal">
         <h2>About Afnuz Academy</h2>
-        <p>Afnuz Academy is a new-age online coaching platform dedicated to helping 10th-grade students secure admission in Class 11 at Jamia Millia Islamia and Aligarh Muslim University. Our mentors are top rankers from JMI, AMU, and DU, passionate about guiding the next generation.</p>
+        <p>
+            Afnuz Academy is an online coaching platform focused on helping Class 10 students prepare for
+            Class 11 entrance exams of Jamia Millia Islamia (JMI) and Aligarh Muslim University (AMU).
+            Our mentors are rank-holders and students from JMI, AMU and DU who guide you like an elder
+            brother or sister – not just teach you, but also support you in planning and strategy.
+        </p>
     </section>
 
-    <!-- TEACHERS -->
-    <section id="teachers">
-        <div class="container">
-            <h2>Our Expert Mentors</h2>
-            <div class="teachers-grid">
-                <div class="teacher glass-card">
-                    <img src="teachers/Rehan.webp" alt="Md Rehan Farhan">
-                    <h3>Md Rehan Farhan</h3>
-                    <p>JMI Rank 20 | B.Com (Hons) | Teaches Economics & Business Studies with real-world examples.</p>
-                </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/mariyam jii.webp" alt="Mariyam Muzaffar Ali">
-                    <h3>Mariyam Muzaffar Ali</h3>
-                    <p>AMU Rank 32 | B.A. Political Science | Expert in Current Affairs & Social Science.</p>
-                </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/salman.webp" alt="Salman">
-                    <h3>Salman</h3>
-                    <p>JMI B.Tech | 97%ile JEE | Master of Mathematics & Logical Reasoning.</p>
-                </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/ammar.webp" alt="Ammar Ahmad">
-                    <h3>Ammar Ahmad</h3>
-                    <p>DU Rank 6 | B.Com (Hons) | Specialist in Accountancy & Commerce.</p>
-                </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/sadiqa.webp" alt="Sadiqa">
-                    <h3>Sadiqa</h3>
-                    <p>AMU Rank 39 | B.Com (Hons) | Focuses on practical finance & clarity.</p>
-                </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/monirah jii.webp" alt="Monirah Siddiqua">
-                    <h3>Monirah Siddiqua</h3>
-                    <p>B.Tech CSE (Data Science) | Teaches AI, ML & Computer Basics.</p>
-                </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/sameer.webp" alt="Sameer Nawaz">
-                    <h3>Sameer Nawaz</h3>
-                    <p>JMI Rank 9 | B.Com (Hons) | Makes complex topics simple & fun.</p>
+    <!-- WHY CHOOSE US -->
+    <section id="why" class="container reveal">
+        <h2>Why Choose Afnuz Academy?</h2>
+        <div class="why-grid">
+            <div class="why-card">
+                <span class="icon">🎓</span>
+                <h3>Mentors with Real Experience</h3>
+                <p>Learn from mentors who have actually cleared JMI and AMU entrance exams and understand the real pattern.</p>
+            </div>
+            <div class="why-card">
+                <span class="icon">📚</span>
+                <h3>Entrance-Oriented Teaching</h3>
+                <p>Classes and study material are designed according to JMI & AMU needs, so your time is used properly.</p>
+            </div>
+            <div class="why-card">
+                <span class="icon">💬</span>
+                <h3>Doubt Support & Guidance</h3>
+                <p>Clear your doubts through WhatsApp and live doubt sessions. You do not have to struggle alone.</p>
+            </div>
+            <div class="why-card">
+                <span class="icon">⚡</span>
+                <h3>Focused New Academy</h3>
+                <p>As a new academy, we give extra attention and effort to each student so that we grow together.</p>
+            </div>
+            <div class="why-card">
+                <span class="icon">🧠</span>
+                <h3>Concept + Practice</h3>
+                <p>We focus on concepts and practice together so you can understand topics and apply them in exams.</p>
+            </div>
+            <div class="why-card">
+                <span class="icon">🌐</span>
+                <h3>Fully Online & Flexible</h3>
+                <p>Prepare from anywhere with live classes, recordings and notes – all from the comfort of your home.</p>
+            </div>
+        </div>
+    </section>
 
+    <!-- STUDENT JOURNEY -->
+    <section id="journey" class="reveal">
+        <div class="container">
+            <h2>Your Journey with Afnuz Academy</h2>
+            <div class="journey-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Strong Basics</h3>
+                    <p>We first build a strong foundation in core subjects so that you feel confident with basics.</p>
                 </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/zainab.webp" alt="Zainab Siddiqui">
-                    <h3>Zainab Siddiqui</h3>
-                    <p>Advanced Tajweed Certified | Teaches Islamic Studies & Arabic.</p>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Entrance-Focused Topics</h3>
+                    <p>Then we move to topics that are most important for JMI and AMU entrance exams.</p>
                 </div>
-                <div class="teacher glass-card">
-                    <img src="teachers/saniay😒.webp" alt="Saniya Khan">
-                    <h3>Saniya Khan</h3>
-                    <p>AMU Rank 41 | B.A. Communicative English | Expert in Language & Grammar.</p>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Tests and Feedback</h3>
+                    <p>Regular tests and simple feedback help you know your strong and weak areas.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Doubt Solving & Mentoring</h3>
+                    <p>We stay connected through WhatsApp and doubt sessions so your preparation never gets stuck.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <h3>Exam Strategy</h3>
+                    <p>Before the exam, we guide you on time management, question selection and confidence building.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="courses" class="container">
-        <h2>Our Courses</h2>
-        <p>Comprehensive online preparation for JMI & AMU Class 11 entrance exams.</p>
-        <ul>
-            <li>Live interactive classes with top rankers</li>
-            <li>Curated notes & practice questions</li>
-            <li>Weekly mock tests with detailed analysis</li>
-            <li>One-on-one doubt clearing</li>
-            <li>Exam strategies & time management tips</li>
-            <li>Recorded sessions for revision</li>
-        </ul>
-    </section>
-
-    <section id="faq" class="container">
-        <h2>Frequently Asked Questions</h2>
-        <div class="faq-item glass-card">
-            <h4>What is the duration of the course?</h4>
-            <p>4-5 months, covering full syllabus, revision, and mock tests.</p>
-        </div>
-        <div class="faq-item glass-card">
-            <h4>Are study materials provided?</h4>
-            <p>Yes, digital notes, practice papers, and recorded lectures included.</p>
-        </div>
-        <div class="faq-item glass-card">
-            <h4>How can I clear doubts?</h4>
-            <p>Through WhatsApp group and weekly live doubt sessions.</p>
-        </div>
-    </section>
-
-    <!-- CONTACT FORM -->
-    <section id="contact">
+    <!-- TEACHERS -->
+    <section id="teachers" class="reveal">
         <div class="container">
-            <h2>Get in Touch</h2>
-            <form id="inquiry-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <input type="tel" name="whatsapp" placeholder="WhatsApp Number" required>
-                <textarea name="message" placeholder="Your Message (Optional)" rows="3"></textarea>
-                <button type="submit">Send Inquiry</button>
-            </form>
-            <div id="status"></div>
+            <h2>Our Mentors</h2>
+            <div class="teachers-grid">
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/Rehan.webp" alt="Md Rehan Farhan">
+                    <h3>Md Rehan Farhan</h3>
+                    <p>JMI Rank 20 • B.Com (Hons) • Teaches Economics & Business Studies with practical examples.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/mariyam jii.webp" alt="Mariyam Muzaffar Ali">
+                    <h3>Mariyam Muzaffar Ali</h3>
+                    <p>AMU Rank 32 • B.A. Political Science • Guides in Social Science and Current Affairs.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/salman.webp" alt="Salman">
+                    <h3>Salman</h3>
+                    <p>JMI B.Tech • 97%ile JEE • Mentor for Mathematics and Logical Reasoning.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/ammar.webp" alt="Ammar Ahmad">
+                    <h3>Ammar Ahmad</h3>
+                    <p>DU Rank 6 • B.Com (Hons) • Focuses on Accountancy & Commerce basics.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/sadiqa.webp" alt="Sadiqa">
+                    <h3>Sadiqa</h3>
+                    <p>AMU Rank 39 • B.Com (Hons) • Helps students understand finance in a simple way.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/monirah jii.webp" alt="Monirah Siddiqua">
+                    <h3>Monirah Siddiqua</h3>
+                    <p>B.Tech CSE (Data Science) • Teaches Computer Basics and modern tech concepts.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/sameer.webp" alt="Sameer Nawaz">
+                    <h3>Sameer Nawaz</h3>
+                    <p>JMI Rank 9 • B.Com (Hons) • Known for making complex topics easy and interesting.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/zainab.webp" alt="Zainab Siddiqui">
+                    <h3>Zainab Siddiqui</h3>
+                    <p>Advanced Tajweed Certified • Teaches Islamic Studies and basic Arabic.</p>
+                </div>
+                <div class="teacher glass-card">
+                    <img loading="lazy" src="teachers/saniay😒.webp" alt="Saniya Khan">
+                    <h3>Saniya Khan</h3>
+                    <p>AMU Rank 41 • B.A. Communicative English • Mentor for English and grammar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (IMPROVED) -->
+    <section id="faq" class="reveal">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-layout">
+                <div class="faq-intro">
+                    <h3>Have questions in mind?</h3>
+                    <p>
+                        Here are some common questions parents and students ask us
+                        before joining Afnuz Academy.
+                    </p>
+                    <ul>
+                        <li><span>✅</span> Course duration and structure</li>
+                        <li><span>✅</span> Notes and study material</li>
+                        <li><span>✅</span> Doubt support and guidance</li>
+                        <li><span>✅</span> Online mode and timings</li>
+                    </ul>
+                    <p style="margin-top:0.8rem;">
+                        If your question is not listed here, you can message us directly on WhatsApp.
+                        We will reply as soon as possible.
+                    </p>
+                    <a href="#" class="wa-btn" data-message="Hi, I have a few questions about Afnuz Academy.">
+                        👉 Ask your question on WhatsApp
+                    </a>
+                </div>
+
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <div class="faq-title">
+                                <span class="icon">⏱️</span>
+                                <span>What is the duration of the course?</span>
+                            </div>
+                            <div class="faq-toggle">▼</div>
+                        </div>
+                        <div class="faq-body">
+                            <p>
+                                The course usually runs for around 4–5 months. During this period we cover the
+                                entrance syllabus, revision and basic practice so that the student is ready
+                                for the exam.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <div class="faq-title">
+                                <span class="icon">📑</span>
+                                <span>Do you provide notes and study material?</span>
+                            </div>
+                            <div class="faq-toggle">▼</div>
+                        </div>
+                        <div class="faq-body">
+                            <p>
+                                Yes. We provide digital notes and practice questions based on JMI & AMU patterns.
+                                Important questions are highlighted during the course.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <div class="faq-title">
+                                <span class="icon">💬</span>
+                                <span>How will I ask doubts?</span>
+                            </div>
+                            <div class="faq-toggle">▼</div>
+                        </div>
+                        <div class="faq-body">
+                            <p>
+                                You can ask doubts through a dedicated WhatsApp group and in live doubt classes.
+                                We try to solve doubts as soon as possible so that you do not feel stuck.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <div class="faq-title">
+                                <span class="icon">💻</span>
+                                <span>Is this coaching fully online?</span>
+                            </div>
+                            <div class="faq-toggle">▼</div>
+                        </div>
+                        <div class="faq-body">
+                            <p>
+                                Yes. All classes are conducted online, so you can join from home using a phone,
+                                tablet or laptop. Recordings may also be shared for revision.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-header">
+                            <div class="faq-title">
+                                <span class="icon">👨‍👩‍👦</span>
+                                <span>Can parents talk to mentors?</span>
+                            </div>
+                            <div class="faq-toggle">▼</div>
+                        </div>
+                        <div class="faq-body">
+                            <p>
+                                Yes. Parents can contact us on WhatsApp if they want to discuss their child's
+                                progress or need guidance about preparation and planning.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT (ONLY WHATSAPP CTA) -->
+    <section id="contact" class="reveal">
+        <div class="container">
+            <h2>Contact</h2>
+            <p>
+                If you want more details about batches, fees or how the classes work,
+                you can directly message us on WhatsApp. We will try to reply as soon as we can.
+            </p>
+            <div class="contact-cta">
+                <a href="#" class="wa-btn" data-message="Hi, I want to know more about Afnuz Academy and your JMI/AMU Class 11 preparation.">
+                    Chat on WhatsApp 📲
+                </a>
+            </div>
+
             <div class="social-links">
                 <a href="https://www.instagram.com/afnuz_academy/" target="_blank">Instagram</a>
                 <a href="https://t.me/+YB6IsRgpcHxiZGM9" target="_blank">Telegram</a>
@@ -758,8 +1120,9 @@
     </div>
 
     <script>
-        // API URL for LOCAL development
-        const API_URL = 'http://localhost:5000/api/contact';
+        // === WhatsApp number in international format ===
+        // If your mobile is 9102295987 (India), full WhatsApp number = 91 + 9102295987
+        const WHATSAPP_NUMBER = '919102295987';
 
         // Preloader
         window.addEventListener('load', () => {
@@ -776,14 +1139,10 @@
             const scrolled = (winScroll / height) * 100;
             document.getElementById('progress-bar').style.width = scrolled + '%';
 
-            // Back to top button
             document.getElementById('backToTop').style.display = winScroll > 300 ? 'block' : 'none';
-
-            // Header shrink on scroll
             document.querySelector('header').classList.toggle('scrolled', winScroll > 50);
         };
 
-        // Back to Top Function
         function topFunction() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -800,79 +1159,33 @@
             localStorage.setItem('theme', newTheme);
         });
 
+        // SCROLL REVEAL
+        function handleReveal() {
+            document.querySelectorAll(".reveal").forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight - 80) {
+                    el.classList.add("active");
+                }
+            });
+        }
+        window.addEventListener("scroll", handleReveal);
+        handleReveal();
+
         // FAQ Toggle
-        document.querySelectorAll('.faq-item h4').forEach(item => {
+        document.querySelectorAll('.faq-item').forEach(item => {
             item.addEventListener('click', () => {
-                item.parentElement.classList.toggle('active');
+                item.classList.toggle('active');
             });
         });
 
-        // === FORM SUBMISSION WITH LOCAL BACKEND ===
-        document.getElementById('inquiry-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const name = this.name.value.trim();
-            const email = this.email.value.trim();
-            const whatsapp = this.whatsapp.value.trim();
-
-            // Basic validation
-            if (!name || !email || !whatsapp) {
-                showStatus('Please fill all required fields.', 'error');
-                return;
-            }
-
-            const status = document.getElementById('status');
-            status.innerHTML = '<div style="color: #fbbf24; padding: 12px; border-radius: 12px; margin-top: 1rem;">Sending...</div>';
-
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-
-            try {
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ name, email, whatsapp })
-                });
-
-                const data = await response.json();
-
-                if (data.msg === 'Sent!') {
-                    showStatus('Thank you! We’ll contact you on WhatsApp soon.', 'success');
-                    this.reset();
-                } else {
-                    showStatus(data.msg || 'Failed to send. Try again.', 'error');
-                }
-            } catch (err) {
-                showStatus('Network error. Please check your connection.', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
+        // All WhatsApp buttons
+        document.querySelectorAll('.wa-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const msg = btn.dataset.message || 'Hi, I want to know about Afnuz Academy.';
+                const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+                window.open(url, '_blank');
+            });
         });
-
-        // Status Message Helper
-        function showStatus(message, type) {
-            const status = document.getElementById('status');
-            const bgColor = type === 'success' ? 'var(--success)' : '#ef4444';
-            status.innerHTML = `
-                <div style="
-                    background: ${bgColor}; 
-                    color: white; 
-                    padding: 14px; 
-                    border-radius: 12px; 
-                    margin-top: 1rem; 
-                    text-align: center;
-                    font-weight: 500;
-                ">
-                    ${message}
-                </div>
-            `;
-            setTimeout(() => status.innerHTML = '', 6000);
-        }
     </script>
 </body>
 </html>
